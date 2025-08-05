@@ -51,9 +51,9 @@ client.once(Events.ClientReady, readyClient => {
 // Đăng nhập bot
 client.login(token);
 
-setInterval(() => {
-  const used = process.memoryUsage();
-  console.clear();
-  console.log('Heap Used:', (used.heapUsed / 1024 / 1024).toFixed(2), 'MB');
-  console.log('RSS:', (used.rss / 1024 / 1024).toFixed(2), 'MB');
-}, 1000); // log mỗi giây
+// setInterval(() => {
+//   const used = process.memoryUsage();
+//   console.clear();
+//   console.log('Heap Used:', (used.heapUsed / 1024 / 1024).toFixed(2), 'MB');
+//   console.log('RSS:', (used.rss / 1024 / 1024).toFixed(2), 'MB');
+// }, 1000); // log mỗi giây

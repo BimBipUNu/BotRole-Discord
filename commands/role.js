@@ -16,16 +16,18 @@ module.exports = {
                 .setDescription('Chọn vai trò')
                 .setRequired(true)
                 .addChoices(
-                    { name: 'SV', value: 'SV' },
-                    { name: 'GV', value: 'GV' }
+                    { name: 'K24', value: 'K24' },
+                    { name: 'GV', value: 'GV' },
+                    { name: 'CTSV', value: 'CTSV' }
                 )),
 
     async execute(interaction) {
         const name = interaction.options.getString('name').trim();
         const roleInput = interaction.options.getString('role');
         const roleMap = {
-            SV: "Sinh viên",
-            GV: "Giáo viên"
+            K24: "K24",
+            GV: "Giáo viên",
+            CTSV: "Công tác sinh viên"
         };
         const roleNameOnDiscord = roleMap[roleInput];
 
@@ -83,7 +85,7 @@ module.exports = {
             try {
                 //Gán role mới và gỡ role mặc định
                 await interaction.member.roles.add(roleToAssign);
-
+                //Gỡ role mặc định
                 const defaultRole = guild.roles.cache.find(r => r.name === 'Người mới');
                 if (defaultRole && interaction.member.roles.cache.has(defaultRole.id)) {
                     try {
