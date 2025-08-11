@@ -44,7 +44,8 @@ module.exports = {
             const sheets = google.sheets({ version: 'v4', auth: client });
 
             const spreadsheetId = process.env.SHEET_ID;
-            const range = 'Sheet1!A2:E1000';
+            const sheetName = roleInput; // Lấy Sheet theo vai trò
+            const range = `${sheetName}!A2:E1000`;
 
             const res = await sheets.spreadsheets.values.get({
                 spreadsheetId,
@@ -103,7 +104,7 @@ module.exports = {
             const discordIdCol = 'E';
             const targetRow = rowIndex + 2; // vì dữ liệu bắt đầu từ hàng 2
 
-            const updateRange = `Sheet1!${statusCol}${targetRow}:${discordIdCol}${targetRow}`;
+            const updateRange = `${sheetName}!${statusCol}${targetRow}:${discordIdCol}${targetRow}`;
             await sheets.spreadsheets.values.update({
                 spreadsheetId,
                 range: updateRange,
@@ -118,10 +119,11 @@ module.exports = {
         } catch (error) {
             console.error('[LỖI BOT]:', error);
             if (interaction.deferred || interaction.replied) {
-                await interaction.followUp({ content: 'Đã xảy ra lỗi không mong muốn.', ephemeral: true });
+                await interaction.followUp({ content: 'Đã xảy ra lỗi không mong muốn, vui lòng liên hệ Admin.', ephemeral: true });
             } else {
-                await interaction.reply({ content: 'Đã xảy ra lỗi không mong muốn.', ephemeral: true });
+                await interaction.reply({ content: 'Đã xảy ra lỗi không mong muốn, vui lòng liên hệ admin.', ephemeral: true });
             }
         }
     }
 };
+
